@@ -1,28 +1,44 @@
 import {Command, flags} from '@oclif/command'
 
-class BundleOutdatedFormatter extends Command {
-  static description = 'describe the command here'
+import {TerminalFormatter} from './formatter/terminal_formatter'
 
+class BundleOutdatedFormatter extends Command {
+  static description = 'Format output of `bundle outdated`'
   static flags = {
-    // add --version flag to show CLI version
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
+    format: flags.string({char: 'f', description: 'Format. (terminal)', default: 'terminal'}),
   }
-
-  static args = [{name: 'file'}]
+  private static readonly formats = ['terminal']
 
   async run() {
-    const {args, flags} = this.parse(BundleOutdatedFormatter)
+    const {flags} = this.parse(BundleOutdatedFormatter)
 
-    const name = flags.name || 'world'
-    this.log(`hello ${name} from ./src/index.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+    if (!this.isAllowFormat(flags.format)) {
+      this.error(`Unknown format: ${flags.format}`)
     }
+
+    if (process.stdin.isTTY) {
+      process.exit()
+    }
+
+    const formatter = this.createFormatter(flags.format)
+    await formatter.readStdin()
+    this.log(formatter.convert())
+  }
+
+  private isAllowFormat(format: string | undefined) {
+    return format === undefined ? false : BundleOutdatedFormatter.formats.includes(format)
+  }
+
+  private createFormatter(format: string | undefined) {
+    let formatter = TerminalFormatter
+    switch (format) {
+      case 'terminal':
+        formatter = TerminalFormatter
+    }
+
+    return new formatter()
   }
 }
 
