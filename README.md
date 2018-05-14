@@ -53,6 +53,12 @@ Outdated gems included in the bundle:
 | headless | 2.3.1 | 2.2.3 | | |
 ```
 
+### Convert to JSON
+
+```
+[{"gem":"faker","newest":"1.6.6","installed":"1.6.5","requested":"~> 1.4","groups":"development, test"},{"gem":"hashie","newest":"3.4.6","installed":"1.2.0","requested":"= 1.2.0","groups":"default"},{"gem":"headless","newest":"2.3.1","installed":"2.2.3","requested":"","groups":""}]
+```
+
 ## Related
 
 * [bundle_outdated_formatter](https://github.com/emsk/bundle_outdated_formatter) - A Ruby implementation of the bundle-outdated-formatter

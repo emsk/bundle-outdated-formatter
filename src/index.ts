@@ -1,5 +1,6 @@
 import {Command, flags} from '@oclif/command'
 
+import {JSONFormatter} from './formatter/json_formatter'
 import {MarkdownFormatter} from './formatter/markdown_formatter'
 import {TerminalFormatter} from './formatter/terminal_formatter'
 
@@ -8,9 +9,9 @@ class BundleOutdatedFormatter extends Command {
   static flags = {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
-    format: flags.string({char: 'f', description: 'Format. (terminal, markdown)', default: 'terminal'}),
+    format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json)', default: 'terminal'}),
   }
-  private static readonly formats = ['terminal', 'markdown']
+  private static readonly formats = ['terminal', 'markdown', 'json']
 
   async run() {
     const {flags} = this.parse(BundleOutdatedFormatter)
@@ -40,6 +41,9 @@ class BundleOutdatedFormatter extends Command {
         break
       case 'markdown':
         formatter = MarkdownFormatter
+        break
+      case 'json':
+        formatter = JSONFormatter
     }
 
     return new formatter()
