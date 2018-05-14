@@ -7,6 +7,11 @@ export class Formatter {
   private static readonly requestedRegexp = /requested (.+)\)/
   private static readonly groupsRegexp = /in groups "(.+)"/
   protected readonly outdatedGems: object[] = []
+  protected isPretty = false
+
+  constructor(flags: any) {
+    this.isPretty = flags.pretty
+  }
 
   readStdin() {
     return new Promise(resolve => {

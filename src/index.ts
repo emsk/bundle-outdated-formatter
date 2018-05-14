@@ -10,6 +10,7 @@ class BundleOutdatedFormatter extends Command {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
     format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json)', default: 'terminal'}),
+    pretty: flags.boolean({char: 'p', description: '`true` if pretty output.'})
   }
   private static readonly formats = ['terminal', 'markdown', 'json']
 
@@ -24,7 +25,7 @@ class BundleOutdatedFormatter extends Command {
       process.exit()
     }
 
-    const formatter = this.createFormatter(flags.format)
+    const formatter = this.createFormatter(flags)
     await formatter.readStdin()
     this.log(formatter.convert())
   }
@@ -33,9 +34,9 @@ class BundleOutdatedFormatter extends Command {
     return format === undefined ? false : BundleOutdatedFormatter.formats.includes(format)
   }
 
-  private createFormatter(format: string | undefined) {
+  private createFormatter(flags: any) {
     let formatter = TerminalFormatter
-    switch (format) {
+    switch (flags.format) {
       case 'terminal':
         formatter = TerminalFormatter
         break
@@ -46,7 +47,7 @@ class BundleOutdatedFormatter extends Command {
         formatter = JSONFormatter
     }
 
-    return new formatter()
+    return new formatter(flags)
   }
 }
 

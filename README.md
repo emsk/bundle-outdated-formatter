@@ -55,8 +55,38 @@ Outdated gems included in the bundle:
 
 ### Convert to JSON
 
+Normal output:
+
 ```
 [{"gem":"faker","newest":"1.6.6","installed":"1.6.5","requested":"~> 1.4","groups":"development, test"},{"gem":"hashie","newest":"3.4.6","installed":"1.2.0","requested":"= 1.2.0","groups":"default"},{"gem":"headless","newest":"2.3.1","installed":"2.2.3","requested":"","groups":""}]
+```
+
+Pretty output:
+
+```
+[
+  {
+    "gem": "faker",
+    "newest": "1.6.6",
+    "installed": "1.6.5",
+    "requested": "~> 1.4",
+    "groups": "development, test"
+  },
+  {
+    "gem": "hashie",
+    "newest": "3.4.6",
+    "installed": "1.2.0",
+    "requested": "= 1.2.0",
+    "groups": "default"
+  },
+  {
+    "gem": "headless",
+    "newest": "2.3.1",
+    "installed": "2.2.3",
+    "requested": "",
+    "groups": ""
+  }
+]
 ```
 
 ## Related

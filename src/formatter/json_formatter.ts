@@ -2,8 +2,11 @@ import {Formatter} from '../formatter'
 
 export class JSONFormatter extends Formatter {
   convert() {
-    return JSON.stringify(this.outdatedGems, (_, value) => {
+    const replacer = (_: any, value: string | null) => {
       return value === null ? '' : value
-    })
+    }
+    const space = this.isPretty ? '  ' : ''
+
+    return JSON.stringify(this.outdatedGems, replacer, space)
   }
 }
