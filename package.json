@@ -12,7 +12,9 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^1",
     "@types/cli-table2": "^0.2.1",
-    "cli-table2": "^0.2.0"
+    "@types/js-yaml": "^3.11.1",
+    "cli-table2": "^0.2.0",
+    "js-yaml": "^3.11.0"
   },
   "devDependencies": {
     "@oclif/test": "^1",

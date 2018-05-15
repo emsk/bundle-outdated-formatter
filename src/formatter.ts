@@ -70,6 +70,6 @@ export class Formatter {
   }
 
   private gemText(text: RegExpExecArray | null, index: number) {
-    return text === null ? null : text[index]
+    return text === null ? '' : text[index]
   }
 }
