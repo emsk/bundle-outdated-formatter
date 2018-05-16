@@ -1,5 +1,6 @@
 import {Command, flags} from '@oclif/command'
 
+import {CSVFormatter} from './formatter/csv_formatter'
 import {JSONFormatter} from './formatter/json_formatter'
 import {MarkdownFormatter} from './formatter/markdown_formatter'
 import {TerminalFormatter} from './formatter/terminal_formatter'
@@ -10,10 +11,10 @@ class BundleOutdatedFormatter extends Command {
   static flags = {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
-    format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json, yaml)', default: 'terminal'}),
+    format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json, yaml, csv)', default: 'terminal'}),
     pretty: flags.boolean({char: 'p', description: '`true` if pretty output.'})
   }
-  private static readonly formats = ['terminal', 'markdown', 'json', 'yaml']
+  private static readonly formats = ['terminal', 'markdown', 'json', 'yaml', 'csv']
 
   async run() {
     const {flags} = this.parse(BundleOutdatedFormatter)
@@ -28,7 +29,7 @@ class BundleOutdatedFormatter extends Command {
 
     const formatter = this.createFormatter(flags)
     await formatter.readStdin()
-    this.log(formatter.convert())
+    this.log(await formatter.convert())
   }
 
   private isAllowFormat(format: string | undefined) {
@@ -49,6 +50,9 @@ class BundleOutdatedFormatter extends Command {
         break
       case 'yaml':
         formatter = YAMLFormatter
+        break
+      case 'csv':
+        formatter = CSVFormatter
     }
 
     return new formatter(flags)

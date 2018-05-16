@@ -110,6 +110,15 @@ Pretty output:
   groups: ''
 ```
 
+### Convert to CSV
+
+```
+"gem","newest","installed","requested","groups"
+"faker","1.6.6","1.6.5","~> 1.4","development, test"
+"hashie","3.4.6","1.2.0","= 1.2.0","default"
+"headless","2.3.1","2.2.3","",""
+```
+
 ## Related
 
 * [bundle_outdated_formatter](https://github.com/emsk/bundle_outdated_formatter) - A Ruby implementation of the bundle-outdated-formatter
