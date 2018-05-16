@@ -164,6 +164,49 @@ Pretty output:
 </gems>
 ```
 
+### Convert to HTML
+
+Normal output:
+
+```
+<table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~> 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
+```
+
+Pretty output:
+
+```
+<table>
+  <tr>
+    <th>gem</th>
+    <th>newest</th>
+    <th>installed</th>
+    <th>requested</th>
+    <th>groups</th>
+  </tr>
+  <tr>
+    <td>faker</td>
+    <td>1.6.6</td>
+    <td>1.6.5</td>
+    <td>~> 1.4</td>
+    <td>development, test</td>
+  </tr>
+  <tr>
+    <td>hashie</td>
+    <td>3.4.6</td>
+    <td>1.2.0</td>
+    <td>= 1.2.0</td>
+    <td>default</td>
+  </tr>
+  <tr>
+    <td>headless</td>
+    <td>2.3.1</td>
+    <td>2.2.3</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+```
+
 ## Related
 
 * [bundle_outdated_formatter](https://github.com/emsk/bundle_outdated_formatter) - A Ruby implementation of the bundle-outdated-formatter
