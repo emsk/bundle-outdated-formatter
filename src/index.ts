@@ -4,6 +4,7 @@ import {CSVFormatter} from './formatter/csv_formatter'
 import {JSONFormatter} from './formatter/json_formatter'
 import {MarkdownFormatter} from './formatter/markdown_formatter'
 import {TerminalFormatter} from './formatter/terminal_formatter'
+import {TSVFormatter} from './formatter/tsv_formatter'
 import {YAMLFormatter} from './formatter/yaml_formatter'
 
 class BundleOutdatedFormatter extends Command {
@@ -11,10 +12,10 @@ class BundleOutdatedFormatter extends Command {
   static flags = {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
-    format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json, yaml, csv)', default: 'terminal'}),
+    format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json, yaml, csv, tsv)', default: 'terminal'}),
     pretty: flags.boolean({char: 'p', description: '`true` if pretty output.'})
   }
-  private static readonly formats = ['terminal', 'markdown', 'json', 'yaml', 'csv']
+  private static readonly formats = ['terminal', 'markdown', 'json', 'yaml', 'csv', 'tsv']
 
   async run() {
     const {flags} = this.parse(BundleOutdatedFormatter)
@@ -53,6 +54,9 @@ class BundleOutdatedFormatter extends Command {
         break
       case 'csv':
         formatter = CSVFormatter
+        break
+      case 'tsv':
+        formatter = TSVFormatter
     }
 
     return new formatter(flags)
