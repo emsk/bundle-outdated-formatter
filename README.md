@@ -15,6 +15,13 @@ bundle-outdated-formatter is a command-line tool to format output of `bundle out
 $ bundle outdated | bundle-outdated-formatter
 ```
 
+## Command Options
+
+| Option | Alias | Description | Default |
+| :----- | :---- | :---------- | :------ |
+| `--format` | `-f` | Format. `terminal`, `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `terminal` |
+| `--pretty` | `-p` | `true` if pretty output.<br>This option is available in `json`, `xml`, or `html` formats. | `false` |
+
 ## Examples
 
 Output of `bundle outdated`:
