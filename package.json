@@ -14,9 +14,11 @@
     "@types/cli-table2": "^0.2.1",
     "@types/csv-stringify": "^1.4.2",
     "@types/js-yaml": "^3.11.1",
+    "@types/xmlbuilder": "^0.0.32",
     "cli-table2": "^0.2.0",
     "csv-stringify": "^3.0.0",
-    "js-yaml": "^3.11.0"
+    "js-yaml": "^3.11.0",
+    "xmlbuilder": "^10.0.0"
   },
   "devDependencies": {
     "@oclif/test": "^1",

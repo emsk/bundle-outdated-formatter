@@ -128,6 +128,42 @@ Pretty output:
 "headless"	"2.3.1"	"2.2.3"	""	""
 ```
 
+### Convert to XML
+
+Normal output:
+
+```
+<?xml version="1.0" encoding="UTF-8"?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~> 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
+```
+
+Pretty output:
+
+```
+<gems>
+  <outdated>
+    <gem>faker</gem>
+    <newest>1.6.6</newest>
+    <installed>1.6.5</installed>
+    <requested>~> 1.4</requested>
+    <groups>development, test</groups>
+  </outdated>
+  <outdated>
+    <gem>hashie</gem>
+    <newest>3.4.6</newest>
+    <installed>1.2.0</installed>
+    <requested>= 1.2.0</requested>
+    <groups>default</groups>
+  </outdated>
+  <outdated>
+    <gem>headless</gem>
+    <newest>2.3.1</newest>
+    <installed>2.2.3</installed>
+    <requested></requested>
+    <groups></groups>
+  </outdated>
+</gems>
+```
+
 ## Related
 
 * [bundle_outdated_formatter](https://github.com/emsk/bundle_outdated_formatter) - A Ruby implementation of the bundle-outdated-formatter
