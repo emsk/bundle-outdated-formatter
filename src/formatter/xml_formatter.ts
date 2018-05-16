@@ -14,7 +14,7 @@ export class XMLFormatter extends Formatter {
     }
     const xml = create('gems', options)
     for (const outdatedGem of this.outdatedGems) {
-      xml.ele('outdated').ele(outdatedGem)
+      xml.ele({outdated: outdatedGem})
     }
 
     return xml.end({allowEmpty: true, pretty: this.isPretty}).trim()
