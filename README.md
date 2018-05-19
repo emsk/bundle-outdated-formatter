@@ -146,6 +146,7 @@ Normal output:
 Pretty output:
 
 ```
+<?xml version="1.0" encoding="UTF-8"?>
 <gems>
   <outdated>
     <gem>faker</gem>
