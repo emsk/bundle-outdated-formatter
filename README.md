@@ -21,6 +21,7 @@ $ bundle outdated | bundle-outdated-formatter
 | :----- | :---- | :---------- | :------ |
 | `--format` | `-f` | Format. `terminal`, `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `terminal` |
 | `--pretty` | `-p` | `true` if pretty output.<br>This option is available in `json`, `xml`, or `html` formats. | `false` |
+| `--style` | `-s` | Terminal table style. `unicode` or `ascii`.<br>This option is available in `terminal` format. | `unicode` |
 
 ## Examples
 
@@ -40,6 +41,8 @@ Outdated gems included in the bundle:
 
 ### Convert to Terminal
 
+Unicode style:
+
 ```
 ┌──────────┬────────┬───────────┬───────────┬───────────────────┐
 │ gem      │ newest │ installed │ requested │ groups            │
@@ -48,6 +51,18 @@ Outdated gems included in the bundle:
 │ hashie   │ 3.4.6  │ 1.2.0     │ = 1.2.0   │ default           │
 │ headless │ 2.3.1  │ 2.2.3     │           │                   │
 └──────────┴────────┴───────────┴───────────┴───────────────────┘
+```
+
+ASCII style:
+
+```
++----------+--------+-----------+-----------+-------------------+
+| gem      | newest | installed | requested | groups            |
++----------+--------+-----------+-----------+-------------------+
+| faker    | 1.6.6  | 1.6.5     | ~> 1.4    | development, test |
+| hashie   | 3.4.6  | 1.2.0     | = 1.2.0   | default           |
+| headless | 2.3.1  | 2.2.3     |           |                   |
++----------+--------+-----------+-----------+-------------------+
 ```
 
 ### Convert to Markdown

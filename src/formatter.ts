@@ -8,9 +8,11 @@ export class Formatter {
   private static readonly groupsRegexp = /in groups "(.+)"/
   protected readonly outdatedGems: object[] = []
   protected isPretty = false
+  protected style = 'unicode'
 
   constructor(flags: any) {
     this.isPretty = flags.pretty
+    this.style = flags.style
   }
 
   readStdin() {

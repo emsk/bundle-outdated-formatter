@@ -15,15 +15,21 @@ class BundleOutdatedFormatter extends Command {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
     format: flags.string({char: 'f', description: 'Format. (terminal, markdown, json, yaml, csv, tsv, xml, html)', default: 'terminal'}),
-    pretty: flags.boolean({char: 'p', description: '`true` if pretty output.'})
+    pretty: flags.boolean({char: 'p', description: '`true` if pretty output.'}),
+    style: flags.string({char: 's', description: 'Terminal table style. (unicode, ascii)', default: 'unicode'})
   }
   private static readonly formats = ['terminal', 'markdown', 'json', 'yaml', 'csv', 'tsv', 'xml', 'html']
+  private static readonly styles = ['unicode', 'ascii']
 
   async run() {
     const {flags} = this.parse(BundleOutdatedFormatter)
 
     if (!this.isAllowFormat(flags.format)) {
       this.error(`Unknown format: ${flags.format}`)
+    }
+
+    if (!this.isAllowStyle(flags.style)) {
+      this.error(`Unknown style: ${flags.style}`)
     }
 
     if (process.stdin.isTTY) {
@@ -37,6 +43,10 @@ class BundleOutdatedFormatter extends Command {
 
   private isAllowFormat(format: string | undefined) {
     return format === undefined ? false : BundleOutdatedFormatter.formats.includes(format)
+  }
+
+  private isAllowStyle(style: string | undefined) {
+    return style === undefined ? false : BundleOutdatedFormatter.styles.includes(style)
   }
 
   private createFormatter(flags: any) {
