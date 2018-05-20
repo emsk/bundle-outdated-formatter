@@ -1,6 +1,7 @@
 import test from 'ava'
 import * as execa from 'execa'
 
+const command = './bin/run'
 const stdin = `
 Fetching gem metadata from https://rubygems.org/..........
 Fetching version metadata from https://rubygems.org/...
@@ -12,6 +13,7 @@ Outdated gems included in the bundle:
 * hashie (newest 3.4.6, installed 1.2.0, requested = 1.2.0) in groups "default"
 * headless (newest 2.3.1, installed 2.2.3)
 `.trim()
+const options = {input: stdin}
 
 test('Terminal format', async t => {
   const stdout = `
@@ -24,11 +26,11 @@ test('Terminal format', async t => {
 └──────────┴────────┴───────────┴───────────┴───────────────────┘
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format terminal`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f terminal`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format terminal --pretty`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f terminal -p`)).stdout, stdout)
+  t.is(await execa.stdout(command, [], options), stdout)
+  t.is(await execa.stdout(command, ['--format', 'terminal'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'terminal'], options), stdout)
+  t.is(await execa.stdout(command, ['--format', 'terminal', '--pretty'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'terminal', '-p'], options), stdout)
 })
 
 test('Markdown format', async t => {
@@ -40,10 +42,10 @@ test('Markdown format', async t => {
 | headless | 2.3.1 | 2.2.3 | | |
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format markdown`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f markdown`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format markdown --pretty`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f markdown -p`)).stdout, stdout)
+  t.is(await execa.stdout(command, ['--format', 'markdown'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'markdown'], options), stdout)
+  t.is(await execa.stdout(command, ['--format', 'markdown', '--pretty'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'markdown', '-p'], options), stdout)
 })
 
 test('JSON format', async t => {
@@ -77,10 +79,10 @@ test('JSON format', async t => {
 ]
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format json`)).stdout, stdoutNormal)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f json`)).stdout, stdoutNormal)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format json --pretty`)).stdout, stdoutPretty)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f json -p`)).stdout, stdoutPretty)
+  t.is(await execa.stdout(command, ['--format', 'json'], options), stdoutNormal)
+  t.is(await execa.stdout(command, ['-f', 'json'], options), stdoutNormal)
+  t.is(await execa.stdout(command, ['--format', 'json', '--pretty'], options), stdoutPretty)
+  t.is(await execa.stdout(command, ['-f', 'json', '-p'], options), stdoutPretty)
 })
 
 test('YAML format', async t => {
@@ -103,10 +105,10 @@ test('YAML format', async t => {
   groups: ''
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format yaml`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f yaml`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format yaml --pretty`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f yaml -p`)).stdout, stdout)
+  t.is(await execa.stdout(command, ['--format', 'yaml'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'yaml'], options), stdout)
+  t.is(await execa.stdout(command, ['--format', 'yaml', '--pretty'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'yaml', '-p'], options), stdout)
 })
 
 test('CSV format', async t => {
@@ -117,10 +119,10 @@ test('CSV format', async t => {
 "headless","2.3.1","2.2.3","",""
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format csv`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f csv`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format csv --pretty`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f csv -p`)).stdout, stdout)
+  t.is(await execa.stdout(command, ['--format', 'csv'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'csv'], options), stdout)
+  t.is(await execa.stdout(command, ['--format', 'csv', '--pretty'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'csv', '-p'], options), stdout)
 })
 
 test('TSV format', async t => {
@@ -131,10 +133,10 @@ test('TSV format', async t => {
 "headless"	"2.3.1"	"2.2.3"	""	""
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format tsv`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f tsv`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format tsv --pretty`)).stdout, stdout)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f tsv -p`)).stdout, stdout)
+  t.is(await execa.stdout(command, ['--format', 'tsv'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'tsv'], options), stdout)
+  t.is(await execa.stdout(command, ['--format', 'tsv', '--pretty'], options), stdout)
+  t.is(await execa.stdout(command, ['-f', 'tsv', '-p'], options), stdout)
 })
 
 test('XML format', async t => {
@@ -169,10 +171,10 @@ test('XML format', async t => {
 </gems>
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format xml`)).stdout, stdoutNormal)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f xml`)).stdout, stdoutNormal)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format xml --pretty`)).stdout, stdoutPretty)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f xml -p`)).stdout, stdoutPretty)
+  t.is(await execa.stdout(command, ['--format', 'xml'], options), stdoutNormal)
+  t.is(await execa.stdout(command, ['-f', 'xml'], options), stdoutNormal)
+  t.is(await execa.stdout(command, ['--format', 'xml', '--pretty'], options), stdoutPretty)
+  t.is(await execa.stdout(command, ['-f', 'xml', '-p'], options), stdoutPretty)
 })
 
 test('HTML format', async t => {
@@ -213,13 +215,13 @@ test('HTML format', async t => {
 </table>
   `.trim()
 
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format html`)).stdout, stdoutNormal)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f html`)).stdout, stdoutNormal)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run --format html --pretty`)).stdout, stdoutPretty)
-  t.is((await execa.shell(`echo '${stdin}' | ./bin/run -f html -p`)).stdout, stdoutPretty)
+  t.is(await execa.stdout(command, ['--format', 'html'], options), stdoutNormal)
+  t.is(await execa.stdout(command, ['-f', 'html'], options), stdoutNormal)
+  t.is(await execa.stdout(command, ['--format', 'html', '--pretty'], options), stdoutPretty)
+  t.is(await execa.stdout(command, ['-f', 'html', '-p'], options), stdoutPretty)
 })
 
 test('Unknown format', async t => {
-  const error = await t.throws(execa.shell(`echo '${stdin}' | ./bin/run --format aaa`))
+  const error = await t.throws(execa(command, ['--format', 'aaa'], options))
   t.regex(error.stderr, /Unknown format: aaa/)
 })
