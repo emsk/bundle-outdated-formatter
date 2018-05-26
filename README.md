@@ -13,12 +13,24 @@ bundle-outdated-formatter is a command-line tool to format output of `bundle out
 
 This module hasn't been published as npm package yet, so install it with the following commands.
 
+Yarn:
+
 ```sh
 $ git clone https://github.com/emsk/bundle-outdated-formatter.git
 $ cd bundle-outdated-formatter
 $ yarn
 $ yarn tsc
 $ yarn link
+```
+
+npm:
+
+```sh
+$ git clone https://github.com/emsk/bundle-outdated-formatter.git
+$ cd bundle-outdated-formatter
+$ npm install
+$ npx tsc
+$ npm link
 ```
 
 ## Usage
