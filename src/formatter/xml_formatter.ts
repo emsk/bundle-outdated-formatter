@@ -4,15 +4,7 @@ import {Formatter} from '../formatter'
 
 export class XMLFormatter extends Formatter {
   convert() {
-    const options = {
-      encoding: 'UTF-8',
-      stringify: {
-        elEscape: (value: string) => {
-          return value
-        }
-      }
-    }
-    const xml = create('gems', options)
+    const xml = create('gems', {encoding: 'UTF-8'})
     for (const outdatedGem of this.outdatedGems) {
       xml.ele({outdated: outdatedGem})
     }

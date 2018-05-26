@@ -4,15 +4,7 @@ import {Formatter} from '../formatter'
 
 export class HTMLFormatter extends Formatter {
   convert() {
-    const options = {
-      headless: true,
-      stringify: {
-        elEscape: (value: string) => {
-          return value
-        }
-      }
-    }
-    const html = create('table', options)
+    const html = create('table', {headless: true})
     html.ele({tr: {th: ['gem', 'newest', 'installed', 'requested', 'groups']}})
     for (const outdatedGem of this.outdatedGems) {
       html.ele({tr: {td: Object.values(outdatedGem)}})
