@@ -41,6 +41,12 @@
   ],
   "homepage": "https://github.com/emsk/bundle-outdated-formatter",
   "keywords": [
+    "cli",
+    "ruby",
+    "bundler",
+    "formatter",
+    "bundle",
+    "outdated",
     "oclif"
   ],
   "license": "MIT",
