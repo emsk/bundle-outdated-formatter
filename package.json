@@ -1,7 +1,7 @@
 {
   "name": "bundle-outdated-formatter",
   "description": "Formatter for `bundle outdated`",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "emsk",
   "bin": {
     "bundle-outdated-formatter": "./bin/run"
